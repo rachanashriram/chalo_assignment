@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<agm-map [latitude]="latitude" [longitude]="latitude" (mapClick)="onAddStop($event)">
+    <div *ngFor="let item of stopList">
+        <agm-marker [latitude]="item.lat" [longitude]="item.lng"></agm-marker>
+    </div>
+</agm-map>
+<router-outlet></router-outlet>
