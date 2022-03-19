@@ -1,0 +1,76 @@
+<div class="container">
+    <form [formGroup]="routeForm" (ngSubmit)="submit()">
+        <!--name-->
+        <div class="form-group">
+
+            <label for="name">Route Name:</label>
+            <input type="text" id="name" class="form-control" formControlName="name" required>
+
+            <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="alert alert-danger">
+
+                <div *ngIf="f.name.errors?.['required']">
+                    Name is required.
+                </div>
+                <div *ngIf="f.name.errors?.['minlength']">
+                    Name must be at least 4 characters long.
+                </div>
+            </div>
+        </div>
+        <!-- direction -->
+        <div class="form-group">
+            <label for="direction">Direction:</label>
+            <select formControlName="direction" class="form-control" >
+                <option>Select Direction</option>
+                <option *ngFor="let dir of directions">{{dir}}</option>
+            </select>
+            <div *ngIf="f.direction.invalid && (f.direction.dirty || f.direction.touched)" class="alert alert-danger">
+
+                <div *ngIf="f.direction.errors?.['required']">
+                    Direction is required.
+                </div>
+            </div>
+        </div>
+<!-- Start stop -->
+        <div class="form-group">
+            <label for="start">Start:</label>
+            <select formControlName="start" class="form-control" (change)="onChooseStop($event)">
+                <option >Select Start Stop</option>
+                <option *ngFor="let start of availStopList">{{start.name}}</option>
+            </select>
+            <div *ngIf="f.start.invalid && (f.start.dirty || f.start.touched)" class="alert alert-danger">
+
+                <div *ngIf="f.start.errors?.['required']">
+                    Starting Stop is required.
+                </div>
+            </div>
+        </div>
+<!--end stop-->
+        <div class="form-group">
+            <label for="end">Start:</label>
+            <select formControlName="end" class="form-control" (change)="onChooseStop($event)">
+                <option >Select End Stop</option>
+                <option *ngFor="let end of availStopList">{{end.name}}</option>
+            </select>
+            <div *ngIf="f.end.invalid && (f.end.dirty || f.end.touched)" class="alert alert-danger">
+
+                <div *ngIf="f.end.errors?.['required']">
+                    End Stop is required.
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD stops -->
+
+        <!--Activate checkbox-->
+        <div class="form-group">
+            <label for="flexCheckDefault">Active :</label>
+              <label>
+                <input type="checkbox" formControlName="active" id="flexCheckDefault" class="form-control" (change)="f.active = !f.active" />
+              </label>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!routeForm.valid">Submit</button>
+
+
+    </form>
+
+</div>

@@ -1,4 +1,4 @@
-<agm-map [latitude]="latitude" [longitude]="latitude" (mapClick)="onAddStop($event)">
+<agm-map [zoom]="13" [latitude]="latitude" [longitude]="longitude" (mapClick)="onAddStop($event)">
     <div *ngFor="let item of stopList">
         <agm-marker [latitude]="item.lat" [longitude]="item.lng"></agm-marker>
     </div>
